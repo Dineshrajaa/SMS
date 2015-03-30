@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />        
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+         <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script> 
+        <script type="text/javascript" src="js/sms.js"></script>       
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+        <title>SMS</title>
+    </head>
+    <body>
+        <section data-role="page" id="login-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <h1>Login</h1>
+            </header>
+            <article data-role="content">
+                <center>
+                    <label for="logintext">Enter your Register Number:</label>
+                    <input type="text" id="logintext" />
+                    <input type="button" id="loginbtn" value="Login" />
+                </center>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="userhome-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <h1>Home</h1>
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="power"class="ui-btn-right">Sign Out</a>
+            </header>
+            <article data-role="content">
+                <center>
+                    <label id="usernamelabel"></label>
+                </center>
+                <a href="#userprofile-page" data-role="button" id="viewprofilebtn">Profile</a> 
+                <a href="#userattendance-page" data-role="button" id="viewattendancebtn">Attendance</a>
+                <a href="#usercia-page" data-role="button" id="viewciabtn">CIA</a>
+                <a href="#usersemester-page" data-role="button" id="viewsembtn">Semester</a>              
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="userprofile-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Your Profile</h1>
+            </header>
+            <article data-role="content">                               
+                <p id="userprofilepara"></p>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="userattendance-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Your Attendance</h1>
+            </header>
+            <article data-role="content">
+                <p id="userattendancepara"></p>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="usercia-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Your CIA details</h1>
+            </header>
+            <article data-role="content">
+                <label for="semname">Semester</label>
+                <select id="semname">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                </select>
+                <label for="cianame">CIA:</label>
+                <select id="cianame">
+                    <option value="cia1">CIA1</option>
+                    <option value="cia2">CIA2</option>
+                    <option value="cia3">CIA3</option>
+                </select>
+                <p id="userciapara"></p>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="usersemester-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Your Semester details</h1>
+            </header>
+            <article data-role="content">
+                <p id="usersemesterpara"></p>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="admin-page">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Admin Panel</h1>
+            </header>
+            <article data-role="content">
+                <a href="#addstudents" data-role="button">Add Students</a>
+                <a href="#addsubjects" data-role="button">Add Subjects</a>
+                <a href="#addattendance" data-role="button">Add Attendance</a>       <a href="#addciamarks" data-role="button">Add CIA Marks</a>
+                <a href="#addsemestermarks" data-role="button">Add Semester Marks</a>
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+        <section data-role="page" id="addsubjects">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Add Subjects</h1>
+            </header>
+            <article data-role="content">
+                <label for="semesterlabel">Semester:</label>
+                <select id="semesterlabel">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                </select>
+                <label for="sub1">Subject 1</label>
+                <input type="text" id="sub1" />
+                <label for="sub2">Subject 2</label>
+                <input type="text" id="sub2" />
+                <label for="sub3"> Subject 3</label>
+                <input type="text" id="sub3" />
+                <label for="sub4">Subject 4</label>
+                <input type="text" id="sub4" />
+                <label for="sub5">Subject 5</label>
+                <input type="text" id="sub5" />
+                <label for="sub6">Subject 6</label>
+                <input type="text" id="sub6" />
+                <input type="button" id="addsubjectbtn" value="Add Subjects" />
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+
+        <section data-role="page" id="addstudents">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Add Students details</h1>
+            </header>
+            <article data-role="content">
+                <label for="uregno">Register No:</label>
+                <input type="text" id="uregno" />
+                <label for="uname">Name:</label>
+                <input type="text" id="uname" />
+                <label for="ufname">Father Name:</label>
+                <input type="text" id="ufname" />
+                <label for="udob">DOB:</label>
+                <input type="date" id="udob" />
+                <label for="ugender">Gender:</label>
+                <select id="ugender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label for="ublood">Blood Group:</label>
+                <input type="text" id="ublood" />
+                <label for="umobile">Mobile:</label>
+                <input type="tel" id="umobile" />
+                <label for="umail">Email:</label>
+                <input type="email" id="umail" />
+                <label for="uaddress">Address:</label>
+                <textarea id="uaddress"></textarea>
+                <input type="button" id="addstudentbtn" value="Add Student" />
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+
+        <section data-role="page" id="addattendance">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Add Attendance Details</h1>
+            </header>
+            <article data-role="content">
+                <label for="studid">Register Number:</label>
+                <input type="text" id="studid" />
+                <label id="studentnamelabel"></label>
+                <label for="twd">Total Working Days:</label>
+                <input type="number" id="twd" />
+                <label for="tlc">Leave Count:</label>
+                <input type="number" id="tlc" />
+                <input type="button" id="addattendancebtn" value="Add" />
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+
+        <section data-role="page" id="addciamarks">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Add CIA Mark Details</h1>
+            </header>
+            <article data-role="content">
+                <label for="studreg">Register Number:</label>
+                <input type="text" id="studreg" />
+                <label id="studentname"></label>
+                <label for="semesterlist">Semester:</label>
+                <select id="semesterlist">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                </select>
+                <label for="cialist">CIA:</label>
+                <select id="cialist">
+                    <option value="cia1">CIA1</option>
+                    <option value="cia2">CIA2</option>
+                    <option value="cia3">CIA3</option>
+                </select>
+                <label  id="sublabel1"></label>
+                <input type="text" id="subject1" />
+                <label  id="sublabel2"></label>
+                <input type="text" id="subject2" />
+                <label  id="sublabel3"></label>
+                <input type="text" id="subject3" />
+                <label  id="sublabel4"></label>
+                <input type="text" id="subject4" />
+                <label  id="sublabel5"></label>
+                <input type="text" id="subject5" />
+                <label  id="sublabel6"></label>
+                <input type="text" id="subject6" />
+                <input type="button" id="addciamarkbtn" value="Add CIA Marks" />
+            </article>
+            <footer data-role="footer" data-position="fixed" data-theme="b">
+                <h1>&copy All Rights Reserved</h1>
+            </footer>
+        </section>
+
+        <section data-role="page" id="addsemestermarks">
+            <header data-role="header" data-position="fixed" data-theme="b">
+                <a href="#" data-rel="back" data-role="button" data-iconpos="notext" data-icon="carat-l">Back</a>
+                <h1>Add Semester Details</h1>
+            </header>
+            <article data-role="content">
+                <label for="studregid">Register Number:</label>
+                <input type="text" id="studregid" />
+                <label id="studregname"></label>
+                <label for="semesterdlist">Semester:</label>
+                <select id="semesterdlist">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                </select>
+                <label  id="ss1"></label>
+                <input type="text" id="subj1" />
+                <label  id="ss2"></label>
+                <input type="text" id="subj2" />
+                <label  id="ss3"></label>
+                <input type="text" id="subj3" />
+                <label  id="ss4"></label>
+                <input type="text" id="subj4" />
+                <label  id="ss5"></label>
+                <input type="text" id="subj5" />
+                <label  id="ss6"></label>
+                <input type="text" id="subj6" />
+                <input type="button" id="addsemarkbtn" value="Add Semester Marks" />
+            </article>
+        </section>
+
+        <script type="text/javascript" src="cordova.js"></script>        
+    </body>
+</html>

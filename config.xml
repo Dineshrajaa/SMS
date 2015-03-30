@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.dinesh.sms" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>SMS</name>
+    <description>
+        A Simple Cordova Student Management System app.
+    </description>
+    <author email="dineshrajaa.93@gmail.com" href="http://cordova.io">
+        Dinesh Raja
+    </author>
+    <content src="index.html" />
+    <gap:plugin name="com.brodysoft.sqliteplugin" />
+    <gap:plugin name="nl.x-services.plugins.toast" />
+    <access origin="*" />
+</widget>
