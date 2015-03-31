@@ -28,7 +28,7 @@ $(document).ready(function(){
 			tx.executeSql("create table if not exists studentattendancetable(aeid integer primary key,sreg integer,sworkingdays integer,spresent integer,sabsent integer)");
 			tx.executeSql("create table if not exists subjectstable(seid integer primary key,semid text unique,a text,b text,c text,d text,e text,f text)");
 			tx.executeSql("create table if not exists ciamarkstable(cid integer primary key,sreg integer,semid text,cianumber text,ca text,cb text,cc text,cd text,ce text,cf text)");
-			tx.executeSql("create table if not exists semmarkstable(eid integer primary key,sreg integer,semid text,a text,b text,c text,d text,e text,f text)");
+			tx.executeSql("create table if not exists semmarkstable(eid integer primary key,sreg integer,semid text,suba text,subb text,subc text,subd text,sube text,subf text)");
 		});
 	}
 
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		toastAlert("Added Student Profile Successfully");		
 	}
 
-	$("#studid,#studreg").on("input",function(){
+	$("#studid,#studreg,#studregid").on("input",function(){
 			//Method to find what is being typed
 			fetchStudentDetails($(this).val());			
 		});
@@ -73,10 +73,10 @@ $(document).ready(function(){
 		dbName.transaction(function(tx){
 			tx.executeSql("select * from studentprofiletable where sreg='"+eid+"'",[],function(tx,results){
 				if (results.rows.length>0) {
-					$("#studentnamelabel,#studentname").text("Name:"+results.rows.item(0).sname);
+					$("#studentnamelabel,#studentname,#studregname").text("Name:"+results.rows.item(0).sname);
 				}
 				else {
-					$("#studentnamelabel,#studentname").text("");
+					$("#studentnamelabel,#studentname,#studregname").text("");
 					toastAlert("Invalid Register number");
 				}
 			});
@@ -99,16 +99,21 @@ $(document).ready(function(){
 		fetchSemesterDetails($("#semesterlist :selected").text());
 	});
 
+	$("#semesterdlist").on("change",function(){
+		//alert($("#semesterlist :selected").text());
+		fetchSemesterDetails($("#semesterdlist :selected").text());
+	});
+
 	function fetchSemesterDetails(sem){
 		dbName.transaction(function(tx){
 			tx.executeSql("select * from subjectstable where semid='"+sem+"'",[],function(tx,results){
 				if (results.rows.length>0) {
-				$("#sublabel1").text(results.rows.item(0).a);
-				$("#sublabel2").text(results.rows.item(0).b);
-				$("#sublabel3").text(results.rows.item(0).c);
-				$("#sublabel4").text(results.rows.item(0).d);
-				$("#sublabel5").text(results.rows.item(0).e);
-				$("#sublabel6").text(results.rows.item(0).f);
+				$("#sublabel1,#ss1").text(results.rows.item(0).a);
+				$("#sublabel2,#ss2").text(results.rows.item(0).b);
+				$("#sublabel3,#ss3").text(results.rows.item(0).c);
+				$("#sublabel4,#ss4").text(results.rows.item(0).d);
+				$("#sublabel5,#ss5").text(results.rows.item(0).e);
+				$("#sublabel6,#ss6").text(results.rows.item(0).f);
 				}
 				else $("#sublabel1,#sublabel2,#sublabel3,#sublabel4,#sublabel5,#sublabel6").text("");
 			});
@@ -190,15 +195,46 @@ $(document).ready(function(){
 
 	function addSemesterMarks(){
 		var stuid=$("#studregid").val();
+		var semer=$("#semesterdlist :selected").text();
 		var subj1=$("#subj1").val();
 		var subj2=$("#subj2").val();
 		var subj3=$("#subj3").val();
 		var subj4=$("#subj4").val();
 		var subj5=$("#subj5").val();
 		var subj6=$("#subj6").val();
+		dbName.transaction(function(tx){
+			tx.executeSql("insert into semmarkstable(sreg,semid,suba,subb,subc,subd,sube,subf) values(?,?,?,?,?,?,?,?)",[stuid,semer,subj1,subj2,subj3,subj4,subj5,subj6]);
+		});
+		toastAlert("Added Semester Mark Details Successfully");
 	}
 
-	
+	$("#semrname").on("change",function(){
+		//alert($("#semesterlist :selected").text());
+		fetchSemMarks($("#semrname :selected").text());
+	});
+
+	function fetchSemMarks(seml){
+		dbName.transaction(function(tx){
+			tx.executeSql("select * from semmarkstable S join subjectstable Su on S.semid=Su.semid where S.sreg='"+userid+"' and S.semid='"+seml+"'",[],function(tx,results){
+				if (results.rows.length>0) {
+					var subn1=results.rows.item(0).a;
+					var subn2=results.rows.item(0).b;
+					var subn3=results.rows.item(0).c;
+					var subn4=results.rows.item(0).d;
+					var subn5=results.rows.item(0).e;
+					var subn6=results.rows.item(0).f;
+					var mark1=results.rows.item(0).suba;
+					var mark2=results.rows.item(0).subb;
+					var mark3=results.rows.item(0).subc;
+					var mark4=results.rows.item(0).subd;
+					var mark5=results.rows.item(0).sube;
+					var mark6=results.rows.item(0).subf;
+					$("#usersemesterpara").html(subn1+":"+mark1+"<br/>"+subn2+":"+mark2+"<br/>"+subn3+":"+mark3+"<br/>"+subn4+":"+mark4+"<br/>"+subn5+":"+mark5+"<br/>"+subn6+":"+mark6+"<br/>");
+				}
+				else $("#usersemesterpara").html(" ");
+			});
+		});
+	}
 
 	//DOM is ready
 	document.addEventListener('deviceready',function(){
@@ -220,5 +256,10 @@ $(document).ready(function(){
 	});
 	$("#addciamarks").tap(function(){
 		fetchSemesterDetails($("#semesterlist :selected").text());
+	});
+	$("#addsemarkbtn").tap(addSemesterMarks);
+
+	$("#viewsembtn").tap(function(){
+		fetchSemMarks($("#semrname :selected").text());
 	});
 });
